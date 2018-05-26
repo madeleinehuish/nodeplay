@@ -1,11 +1,17 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+
+require('./models/User'); //this needs to be run first, before passport
 require('./services/passport');
 
-const PORT = process.env.PORT || 5000;
+mongoose.connect(keys.mongoURI);
+
 const app = express();
 
 require('./routes/authRoutes')(app);
 
+const PORT = process.env.PORT || 5000;
 console.log('Listening on port ', PORT);
 app.listen(PORT);
 
