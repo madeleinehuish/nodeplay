@@ -20,7 +20,8 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStrategy({
 		clientID : keys.googleClientID,
 		clientSecret : keys.googleClientSecret,
-		callbackURL : '/auth/google/callback' //this is a little different than the video
+		callbackURL : '/auth/google/callback',
+		proxy: true  // this is here to deal with issues of relative callbackURL when it goes to Heroku and makes the page http (which then Google doesn't recognize)
 	}, (accessToken, refreshToken, profile, done) => {
 				User.findOne({ googleId: profile.id })
 						.then((existingUser) => {
