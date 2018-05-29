@@ -17,5 +17,6 @@ module.exports = app => {
 
 	app.get('/api/current_user', (req, res) => {
 		res.send(req.user);
+		// res.send(req.session); //this shows relationship between cookieSession and passport. cookieSession passes info (user) to req.session object
 	})
 }
